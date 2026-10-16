@@ -1,0 +1,6 @@
+-keep class dev.cubiclib.recording.** { *; }
+-keep class dev.cubiclib.odometry.PodSpec { *; }
+-keep class dev.cubiclib.odometry.Pose2 { *; }
+-keep class dev.cubiclib.ftc.RobotConfig { *; }
+-keep class dev.cubiclib.ftc.RobotConfig$* { *; }
+-keep class dev.cubiclib.ftc.CubicLib { *; }

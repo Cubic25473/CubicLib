@@ -1,0 +1,103 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.cubiclib",
+    "module": "cubic-ftc",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.1.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "dev.cubiclib",
+          "module": "cubic-core",
+          "version": {
+            "requires": "0.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cubic-ftc-0.1.0.aar",
+          "url": "cubic-ftc-0.1.0.aar",
+          "size": 32650,
+          "sha512": "3fc349bb74b393ee324602b63473e04efb7cf564abd82fff2d1e85c460a453e2842c15615fea66bae3397c9e593a22bd3f193f34a25650b3f0a91c0019021e2f",
+          "sha256": "d439847fef5737eb962412e5e90b6dbfd41336d43a8bb6ffa40b25ec701bf235",
+          "sha1": "f1791ddb28f676ddfba777dda24df72b4182c433",
+          "md5": "1d8cdfb5873bb1f204ad88ca1ca65e19"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.nanohttpd",
+          "module": "nanohttpd",
+          "version": {
+            "requires": "2.3.1"
+          }
+        },
+        {
+          "group": "dev.cubiclib",
+          "module": "cubic-core",
+          "version": {
+            "requires": "0.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cubic-ftc-0.1.0.aar",
+          "url": "cubic-ftc-0.1.0.aar",
+          "size": 32650,
+          "sha512": "3fc349bb74b393ee324602b63473e04efb7cf564abd82fff2d1e85c460a453e2842c15615fea66bae3397c9e593a22bd3f193f34a25650b3f0a91c0019021e2f",
+          "sha256": "d439847fef5737eb962412e5e90b6dbfd41336d43a8bb6ffa40b25ec701bf235",
+          "sha1": "f1791ddb28f676ddfba777dda24df72b4182c433",
+          "md5": "1d8cdfb5873bb1f204ad88ca1ca65e19"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "cubic-ftc-0.1.0-sources.jar",
+          "url": "cubic-ftc-0.1.0-sources.jar",
+          "size": 7281,
+          "sha512": "83c9ce75c2c2cb90671768a3bd989f99172db75f34d8ae8e21894bc8145f2369eecd35b5e942366267176e8f24e6525a4e9ea972c987ea11d067866f6f8ee7d0",
+          "sha256": "cdc722f73e7376ac228b56584db405aecc69d3930c65ceddefa90dafdbe12172",
+          "sha1": "0e63d342e98f0ac8a0dce3ada49d99e26a397d41",
+          "md5": "da55e0bb38bcd769d6e5295db93ad44b"
+        }
+      ]
+    }
+  ]
+}

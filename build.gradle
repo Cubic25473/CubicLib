@@ -1,0 +1,12 @@
+plugins {
+    id 'com.android.library' version '8.13.2' apply false
+}
+allprojects {
+    group = 'dev.cubiclib'
+    version = '0.1.0'
+}
+subprojects {
+    plugins.withId('maven-publish') {
+        publishing { repositories { maven { name = 'Distribution'; url = rootProject.layout.buildDirectory.dir('maven') } } }
+    }
+}

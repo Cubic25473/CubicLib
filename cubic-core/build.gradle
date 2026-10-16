@@ -1,0 +1,11 @@
+plugins { id 'java-library'; id 'maven-publish' }
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+}
+dependencies {
+    api 'com.google.code.gson:gson:2.11.0'
+    testImplementation 'junit:junit:4.13.2'
+}
+publishing { publications { core(MavenPublication) { from components.java; artifactId = 'cubic-core' } } }

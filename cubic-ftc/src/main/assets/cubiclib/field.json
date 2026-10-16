@@ -1,0 +1,11 @@
+{
+  "id":"BIOBUZZ-TU04-nominal", "name":"BIOBUZZ · 2026–2027", "sizeMm":3657.6,
+  "source":"https://ftc-resources.firstinspires.org/ftc/archive/2027/game",
+  "note":"Original schematic from TU04 §9. Nominal geometry; central structure treated as a conservative no-drive envelope. Confirm against your field before enabling route comparisons. Moving robots and game pieces are not modeled.",
+  "obstacles":[{"x":1200.658,"y":1190,"w":1256.284,"h":1277.6,"name":"HIVE envelope"},
+    {"x":1159.2,"y":3557.6,"w":120,"h":100,"name":"Flower"},
+    {"x":3557.6,"y":2378.4,"w":100,"h":120,"name":"Flower"},
+    {"x":0,"y":1159.2,"w":100,"h":120,"name":"Flower"},
+    {"x":2378.4,"y":0,"w":120,"h":100,"name":"Flower"}],
+  "flowers":[[1219.2,3607.6],[3607.6,2438.4],[50,1219.2],[2438.4,50]]
+}

@@ -1,0 +1,98 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.cubiclib",
+    "module": "cubic-core",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.1.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.11.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cubic-core-0.1.0.jar",
+          "url": "cubic-core-0.1.0.jar",
+          "size": 29029,
+          "sha512": "343c5461fc9c3568117a20355a6342d52f0a068a37e8a0e54ec4cebdc17a37ecfb84f17d80fda487251d26c768d29551a8ee92e85b945be695defc65cab93779",
+          "sha256": "28ccec725c5d10d39ca506007d41278d3692d3e3fcb17fc17b67b9cf38f93eaf",
+          "sha1": "8b89b25271dc9b8540e8a773a3c1a0cd4768291a",
+          "md5": "8160f3bafce7403ca0857dc48546a2d3"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.11.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "cubic-core-0.1.0.jar",
+          "url": "cubic-core-0.1.0.jar",
+          "size": 29029,
+          "sha512": "343c5461fc9c3568117a20355a6342d52f0a068a37e8a0e54ec4cebdc17a37ecfb84f17d80fda487251d26c768d29551a8ee92e85b945be695defc65cab93779",
+          "sha256": "28ccec725c5d10d39ca506007d41278d3692d3e3fcb17fc17b67b9cf38f93eaf",
+          "sha1": "8b89b25271dc9b8540e8a773a3c1a0cd4768291a",
+          "md5": "8160f3bafce7403ca0857dc48546a2d3"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "cubic-core-0.1.0-sources.jar",
+          "url": "cubic-core-0.1.0-sources.jar",
+          "size": 12603,
+          "sha512": "e2bd4cac61ac5e29f42446e38eccdc643510eeb36c33a62003e5b3b691c07d64c44da0dfbf747e13e5edc8e29a7f84da78876b884eb2be99e1355f0103b74fda",
+          "sha256": "7e61bc57487e8b00c7f23ed211b9d84dc3e1a88f3a3aaee7956c2ea7d6ae52e0",
+          "sha1": "6e566577b97991f48c024ddd27c2b1d4211b11b9",
+          "md5": "2053384110af77fe5ee8009ddf87b12a"
+        }
+      ]
+    }
+  ]
+}
