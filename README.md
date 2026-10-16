@@ -1,6 +1,6 @@
 # CubicLib
 
-An independent, Java-first FTC command framework with configurable dead-wheel odometry and a robot-hosted performance dashboard. **No Ivy or Pedro dependency.** Version 0.1.0 is an initial implementation, built against FTC SDK **12.0.0** and not yet tested on a physical robot.
+An independent, Java-first FTC command framework with configurable dead-wheel odometry and a robot-hosted performance dashboard. **No Ivy or Pedro dependency.** Version 0.2.0 is a local development update (not yet published), built against FTC SDK **12.0.0** and not yet tested on a physical robot.
 
 ## Included
 
@@ -25,6 +25,8 @@ Set `JAVA_HOME` to your JDK and `ANDROID_HOME` to your SDK, or configure `sdk.di
 The Maven repository is generated under `build/maven/`; Android AAR and Java JAR outputs are under their module `build/` directories. The AAR alone does **not** contain its transitive dependencies—use the Maven installation below.
 
 ## Public Maven repository
+
+The public release is still **0.1.0**. It does not include the simplified API or `GlobalObjects` shown below. Build and install the local **0.2.0** repository using the next section to use those features.
 
 Add this to your FTC project's existing repositories block:
 
@@ -55,7 +57,7 @@ Keep `google()` and `mavenCentral()` for transitive dependencies. Requires FTC S
 
    ```groovy
    dependencies {
-       implementation 'dev.cubiclib:cubic-ftc:0.1.0'
+       implementation 'dev.cubiclib:cubic-ftc:0.2.0'
    }
    ```
 4. Sync, build and deploy the Robot Controller app. This release requires the application's FTC SDK 12.0.0 dependencies. It does not bundle a second FTC SDK.
@@ -70,18 +72,46 @@ The startup annotation is kept by the included consumer ProGuard rules. If using
 Extend `CubicOpMode`, implement `configure()`, and optionally override `onStarted()`, `onLoop()` and `onStopped()`. `configure()` runs during Init and registers your subsystems and command bindings. Localization is updated once per loop, followed by the scheduler, your loop hook and sampling. `CubicOpMode` is intended for **TeleOp**; it does not infer official match periods or implement an autonomous path follower.
 
 ```java
-scheduler.register(intake);
-new Trigger(scheduler, () -> gamepad1.right_bumper).whileTrue(
-    Commands.run(() -> intake.setPower(1), interrupted -> intake.stop(), intake)
-);
-scheduler.schedule(Commands.sequence(
-    Commands.instant(() -> mark("intake-start")),
-    Commands.timeout(collectCommand, 2.0),
-    Commands.instant(() -> mark("score-attempt"))
-));
+@Override protected void configure() {
+    Intake intake = register(new Intake());
+    whileHeld(() -> gamepad1.a, intake.collect());
+    onPress(() -> gamepad1.b, intake.collect().withTimeout(2));
+    onPressDo(() -> gamepad1.x, () -> mark("pickup-confirmed"));
+}
 ```
 
-`intake` and `collectCommand` above are your own mechanism/command implementations. Commands are reusable after completion; never schedule the same mutable child instance independently while a group owns it. Groups reject duplicate children and parallel subsystem conflicts. `whileTrue` schedules on the rising edge and cancels on release; it does not repeatedly restart a finished command. Scheduler mutation and subsystem access belong on the OpMode thread. A stopped scheduler is terminal; create a new scheduler for each OpMode.
+The standalone subsystem can access hardware directly:
+
+```java
+import com.qualcomm.robotcore.hardware.DcMotor;
+import dev.cubiclib.command.Command;
+import dev.cubiclib.command.Subsystem;
+import static dev.cubiclib.ftc.GlobalObjects.hardwareMapEverywhere;
+
+public final class Intake implements Subsystem {
+    private final DcMotor motor = hardwareMapEverywhere.get(DcMotor.class, "intake");
+    public Command collect() { return run(() -> motor.setPower(1)); }
+    @Override public void stop() { motor.setPower(0); }
+}
+```
+
+Copy `examples/Intake.java` and `examples/SimpleTeleOp.java` together for a complete example.
+
+- `register(new Subsystem())` registers and returns the mechanism.
+- `onPress(condition, command)` runs once per press; `onPressDo(condition, action)` handles simple markers.
+- `whileHeld(condition, command)` schedules on press and cancels on release. It does not restart a completed or interrupted command until the next press.
+- `subsystem.run(action)` repeats, declares its requirement and calls `stop()` when ended. `subsystem.once(action)` performs one action with the same requirement, without automatically undoing it.
+- `command.withTimeout(seconds)` limits duration; `command.then(next)` sequences actions.
+- `defaultCommand(subsystem, action)` runs whenever the subsystem is free and stops it on interruption.
+- `schedule(command)` schedules directly; use it in `onStarted()` for actions that should start at Start, rather than during Init.
+
+Existing `scheduler`, `Trigger` and `Commands` APIs remain available. Commands are reusable after completion; never schedule a mutable child independently while a group owns it. Groups reject duplicate children and parallel subsystem conflicts.
+
+### GlobalObjects.hardwareMapEverywhere
+
+`dev.cubiclib.ftc.GlobalObjects.hardwareMapEverywhere` is the current SDK HardwareMap, set automatically before `createLocalizer()` and `configure()`. Create subsystems **inside configure()**, never in OpMode field initializers, static initializers or static singletons. No HardwareMap constructor parameter is needed.
+
+The map remains available through stop callbacks, then is cleared to `null`, including on initialization/loop failure. Treat the field as read-only; recreate hardware-owning subsystems each OpMode and use them only on the OpMode thread. `GlobalObjects.requireHardwareMap()` returns the same map with a descriptive error before Init or after Stop. Ordinary SDK OpModes do not populate this field; pass their hardwareMap explicitly instead.
 
 Use `mark("pickup-confirmed")` and `mark("score-confirmed")` only on actual success. Attempts and command completion are not counted as scores. `resetPose(new Pose2(xMm, yMm, radians))` starts a new path segment; reports will not bridge that reset. All actuator subsystems must implement `stop()` so interruption/error cleanup can make your mechanisms safe.
 

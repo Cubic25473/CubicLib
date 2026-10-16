@@ -1,4 +1,15 @@
-# Verification record — 0.1.0
+# Verification record — 0.2.0 local preview
+
+Validated October 16, 2026 with Android Studio JDK 25, SDK 34 and FTC SDK 12.0.0.
+
+- 28 Java core tests and 5 FTC unit tests pass, including simplified action requirements, release/interruption/timeout behavior, global hardware ownership, Stop cleanup failures and loop-error cleanup.
+- All 14 dashboard JavaScript tests pass.
+- Android debug and release AARs build; debug compilation checks all three TeamCode examples against the SDK.
+- Local Maven artifacts generated for `dev.cubiclib:cubic-ftc:0.2.0` and `cubic-core:0.2.0`; not uploaded to the public repository.
+- CubicWebClient production export passes with the updated setup, command and shared-hardware guides. Downloadable examples match compiled source examples.
+- Hardware behavior still requires on-robot validation. New global access must be checked across repeated Init/Stop cycles and initialization failures on the Control Hub.
+
+## Previous verification — 0.1.0
 
 Validated October 10, 2026 on macOS using Android Studio JDK 25, Android SDK 34, Gradle 9.1 and FTC SDK 12.0.0 artifacts.
 
